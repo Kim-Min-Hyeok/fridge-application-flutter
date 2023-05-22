@@ -48,83 +48,117 @@ class _ListPageState extends State<ListPage> {
           ), //나중에 저장된 냉장고 이름으로 바꿔야 함
         ],
       ),
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: 100,
-              child: Row(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                    width: 324,
+                    height: 50,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorStyle.primary, // Set the desired border color
+                            width: 3.0, // Set the desired border weight
+                          ),
+                        ),
+                      ),
+                    )),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.search,
+                      size: 50,
+                      color: ColorStyle.primary,
+                    ))
+              ],
+            ),
+            Expanded(
+              child: Stack(
                 children: [
-                  ElevatedButton(
-                    onPressed: () {  },
-                    child: Image.asset(
-                      "assets/images/list_active.png",
-                      width: 80,
-                    ),
+                  ListView(
+            
                   ),
-                  const SizedBox(width: 100,),
-                  ElevatedButton(
-                    onPressed: () {  },
-                    child: Image.asset(
-                      "assets/images/recipe.png",
-                      width: 80,
-                    ),
-                  ),
+                  Positioned(
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            child: Text(
+                              '곧 상해요  0',
+                              style: TextStyle(
+                                fontSize: 20
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            child: Text(
+                              '상했어요  0',
+                              style: TextStyle(
+                                fontSize: 20
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  )
                 ],
               ),
             )
-          )
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: AnimatedBottomNavigationBar(
         barColor: Colors.white,
         controller: FloatingBottomBarController(initialIndex: 0),
         bottomBar: [
           BottomBarItem(
-            icon: Image.asset(
-                      "assets/images/list.png",
-                      width: 80,
-                    ),
-            iconSelected: Image.asset(
-                      "assets/images/list_active.png",
-                      width: 80,
-                    ),
-            title: 'list',
-            onTap: (value) {
-              setState(() {
-                _selectedIndex = value;
-              });
-            }
-          ),
+              icon: Image.asset(
+                "assets/images/list.png",
+                height: 50,
+              ),
+              iconSelected: Image.asset(
+                "assets/images/list_active.png",
+                height: 50,
+              ),
+              onTap: (value) {
+                setState(() {
+                  _selectedIndex = value;
+                });
+              }),
           BottomBarItem(
-            icon: Image.asset(
-                      "assets/images/recipe.png",
-                      width: 80,
-                    ),
-            iconSelected: Image.asset(
-                      "assets/images/recipe_active.png",
-                      width: 80,
-                    ),
-            title: 'recipe',
-            onTap: (value) {
-              setState(() {
-                _selectedIndex = value;
-              });
-            }
-          ),
+              icon: Image.asset(
+                "assets/images/recipe.png",
+                height: 50,
+              ),
+              iconSelected: Image.asset(
+                "assets/images/recipe_active.png",
+                height: 50,
+              ),
+              onTap: (value) {
+                setState(() {
+                  _selectedIndex = value;
+                });
+              }),
         ],
         bottomBarCenterModel: BottomBarCenterModel(
-          centerBackgroundColor: Colors.white,
-          centerIcon: FloatingCenterButton(
-            child: Image.asset('assets/images/plus.png'),
-          ),
-          centerIconChild: [
-            FloatingCenterButtonChild(
-            child: Image.asset('assets/images/barcode_scanner.png'),
+            centerBackgroundColor: Colors.black12,
+            centerIcon: FloatingCenterButton(
+              child: Image.asset('assets/images/plus.png'),
             ),
-          ]
-        ),
+            centerIconChild: [
+              FloatingCenterButtonChild(
+                child: Image.asset('assets/images/barcode_scanner.png'),
+              ),
+            ]),
       ),
     );
   }
