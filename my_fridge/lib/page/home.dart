@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  int fridge_num = 0;
+  // ignore: non_constant_identifier_names, prefer_interpolation_to_compose_strings
+  String fridge_path = 'assets/images/fridge.png' +
+      fridge_num.toStringAsFixed(fractionDigits) +
+      '';
 
   addFridge(BuildContext context) {
     return InkWell(
@@ -9,7 +15,18 @@ class HomePage extends StatelessWidget {
       child: Ink.image(
         width: 175,
         height: 130,
-        image: const AssetImage('assets/add_fridge.png'),
+        image: const AssetImage('assets/images/add_fridge.png'),
+      ),
+    );
+  }
+
+  fridgeAdded(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      child: Ink.image(
+        width: 175,
+        height: 130,
+        image: const AssetImage('assets/images/fridge$fridge_num.png'),
       ),
     );
   }
@@ -54,7 +71,9 @@ class HomePage extends StatelessWidget {
                 crossAxisCount: 2,
                 scrollDirection: Axis.vertical,
                 primary: false,
-                children: const [],
+                children: [
+                  addFridge(context),
+                ],
               ),
             ),
           ],
