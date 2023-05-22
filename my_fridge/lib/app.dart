@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -15,9 +13,13 @@ class MyFridge extends StatelessWidget {
       title: 'MyFridge',
       initialRoute: '/',
       routes: {
-        '/':(BuildContext context) => HomePage(),
-        '/list':(BuildContext context) => ListPage(),
+        '/': (BuildContext context) => const HomePage(),
+        '/list': (BuildContext context) => const ListPage(),
       },
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+      ),
     );
   }
 }

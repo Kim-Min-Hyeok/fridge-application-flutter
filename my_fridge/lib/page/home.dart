@@ -1,21 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  addFridge(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      child: Ink.image(
+        width: 175,
+        height: 130,
+        image: const AssetImage('assets/add_fridge.png'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/list');
-          }, 
-          child: const Text('List'),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 1,
+        title: const Text(
+          '우리집 냉장고',
+          style: TextStyle(
+            color: Color(0xFF0C4C8A),
+            fontWeight: FontWeight.w900,
+            fontSize: 30,
+          ),
         ),
-      )
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 30,
+          vertical: 30,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              '관리중',
+              style: TextStyle(
+                color: Color(0xFF9C9899),
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                scrollDirection: Axis.vertical,
+                primary: false,
+                children: const [],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
