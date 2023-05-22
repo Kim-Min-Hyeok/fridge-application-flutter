@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_fridge/Theme/colorTheme.dart';
+import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
@@ -9,6 +10,8 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +76,56 @@ class _ListPageState extends State<ListPage> {
             )
           )
         ],
-      )
+      ),
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        barColor: Colors.white,
+        controller: FloatingBottomBarController(initialIndex: 0),
+        bottomBar: [
+          BottomBarItem(
+            icon: Image.asset(
+                      "assets/images/list.png",
+                      width: 80,
+                    ),
+            iconSelected: Image.asset(
+                      "assets/images/list_active.png",
+                      width: 80,
+                    ),
+            title: 'list',
+            onTap: (value) {
+              setState(() {
+                _selectedIndex = value;
+              });
+            }
+          ),
+          BottomBarItem(
+            icon: Image.asset(
+                      "assets/images/recipe.png",
+                      width: 80,
+                    ),
+            iconSelected: Image.asset(
+                      "assets/images/recipe_active.png",
+                      width: 80,
+                    ),
+            title: 'recipe',
+            onTap: (value) {
+              setState(() {
+                _selectedIndex = value;
+              });
+            }
+          ),
+        ],
+        bottomBarCenterModel: BottomBarCenterModel(
+          centerBackgroundColor: Colors.white,
+          centerIcon: FloatingCenterButton(
+            child: Image.asset('assets/images/plus.png'),
+          ),
+          centerIconChild: [
+            FloatingCenterButtonChild(
+            child: Image.asset('assets/images/barcode_scanner.png'),
+            ),
+          ]
+        ),
+      ),
     );
   }
 }
