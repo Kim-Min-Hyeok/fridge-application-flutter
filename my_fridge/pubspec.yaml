@@ -14,6 +14,8 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   floating_bottom_bar: ^0.0.2
+  animated_splash_screen: ^1.3.0
+  page_transition: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -39,6 +41,7 @@ flutter:
     - assets/images/fridge4.png
     - assets/images/fridge5.png
     - assets/images/fridge6.png
+    - assets/images/splash.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
