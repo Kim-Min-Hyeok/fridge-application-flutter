@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:my_fridge/page/add.dart';
+import 'package:my_fridge/page/recipe.dart';
+import 'package:my_fridge/page/recipe_detail.dart';
 import 'package:my_fridge/theme/colorTheme.dart';
 import 'package:page_transition/page_transition.dart';
 import 'page/list.dart';
@@ -27,6 +28,9 @@ class MyFridge extends StatelessWidget {
       ),
         '/home': (BuildContext context) => const HomePage(),
         '/list': (BuildContext context) => const ListPage(),
+        '/recipe': (BuildContext context) => const RecipePage(),
+        '/add': (BuildContext context) => const AddPage(),
+        '/recipe_detail': (BuildContext context) => const RecipeDetailPage(),
       },
       theme: ThemeData(
         useMaterial3: true,

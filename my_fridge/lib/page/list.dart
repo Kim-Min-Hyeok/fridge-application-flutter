@@ -29,7 +29,7 @@ class _ListPageState extends State<ListPage> {
         title: const Text(
           '상품목록',
           style: TextStyle(
-              color: Color.fromRGBO(25, 63, 128, 100),
+              color: ColorStyle.primary,
               fontSize: 20,
               fontWeight: FontWeight.bold),
         ),
@@ -61,7 +61,8 @@ class _ListPageState extends State<ListPage> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: ColorStyle.primary, // Set the desired border color
+                            color: ColorStyle
+                                .primary, // Set the desired border color
                             width: 3.0, // Set the desired border weight
                           ),
                         ),
@@ -77,89 +78,71 @@ class _ListPageState extends State<ListPage> {
               ],
             ),
             Expanded(
-              child: Stack(
-                children: [
-                  ListView(
-            
-                  ),
-                  Positioned(
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            child: Text(
-                              '곧 상해요  0',
-                              style: TextStyle(
-                                fontSize: 20
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            child: Text(
-                              '상했어요  0',
-                              style: TextStyle(
-                                fontSize: 20
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  )
-                ],
-              ),
+              child: ListView(),
             )
           ],
         ),
       ),
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-        barColor: Colors.white,
-        controller: FloatingBottomBarController(initialIndex: 0),
-        bottomBar: [
-          BottomBarItem(
-              icon: Image.asset(
-                "assets/images/list.png",
+      floatingActionButton: ClipOval(
+        child: FloatingActionButton.large(
+          backgroundColor: ColorStyle.primary,
+          onPressed: () {
+            Navigator.pushNamed(context, '/add');
+          },
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 80,
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: ColorStyle.background,
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              break;
+            case 1:
+              break;
+            case 2:
+              break;
+          }
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              "assets/images/list.png",
+              height: 70,
+            ),
+            activeIcon: Image.asset(
+              "assets/images/list_active.png",
+              height: 70,
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+              icon: Container(
                 height: 50,
               ),
-              iconSelected: Image.asset(
-                "assets/images/list_active.png",
-                height: 50,
-              ),
-              onTap: (value) {
-                setState(() {
-                  _selectedIndex = value;
-                });
-              }),
-          BottomBarItem(
+              label: ''),
+          BottomNavigationBarItem(
               icon: Image.asset(
                 "assets/images/recipe.png",
-                height: 50,
+                height: 70,
               ),
-              iconSelected: Image.asset(
+              activeIcon: Image.asset(
                 "assets/images/recipe_active.png",
-                height: 50,
+                height: 70,
               ),
-              onTap: (value) {
-                setState(() {
-                  _selectedIndex = value;
-                });
-              }),
+              label: ''),
         ],
-        bottomBarCenterModel: BottomBarCenterModel(
-            centerBackgroundColor: Colors.black12,
-            centerIcon: FloatingCenterButton(
-              child: Image.asset('assets/images/plus.png'),
-            ),
-            centerIconChild: [
-              FloatingCenterButtonChild(
-                child: Image.asset('assets/images/barcode_scanner.png'),
-              ),
-            ]),
       ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
     );
   }
 }
