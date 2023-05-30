@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_fridge/page/list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,8 +39,8 @@ class _HomePageState extends State<HomePage> {
           TextButton(
             onPressed: () {
               Navigator.pushNamed(context, '/list');
-            }, 
-            child:Text('임시버튼'),
+            },
+            child: const Text('임시버튼'),
           )
         ],
       ),

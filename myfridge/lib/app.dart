@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:my_fridge/page/add.dart';
+import 'package:my_fridge/page/login.dart';
 import 'package:my_fridge/page/recipe.dart';
 import 'package:my_fridge/page/recipe_detail.dart';
 import 'package:my_fridge/theme/colorTheme.dart';
@@ -18,15 +19,16 @@ class MyFridge extends StatelessWidget {
       //initialRoute: '/',
       routes: {
         '/': (BuildContext context) => AnimatedSplashScreen(
-        duration: 2000,
-        splash: Image.asset('assets/images/splash.png'),
-        nextScreen: const HomePage(),
-        splashTransition: SplashTransition.fadeTransition,
-        pageTransitionType: PageTransitionType.fade,
-        splashIconSize: 300,
-        backgroundColor: ColorStyle.background,
-      ),
+              duration: 2000,
+              splash: Image.asset('assets/images/splash.png'),
+              nextScreen: const LoginPage(),
+              splashTransition: SplashTransition.fadeTransition,
+              pageTransitionType: PageTransitionType.fade,
+              splashIconSize: 300,
+              backgroundColor: ColorStyle.background,
+            ),
         '/home': (BuildContext context) => const HomePage(),
+        '/login': (BuildContext context) => const LoginPage(),
         '/list': (BuildContext context) => const ListPage(),
         '/recipe': (BuildContext context) => const RecipePage(),
         '/add': (BuildContext context) => const AddPage(),

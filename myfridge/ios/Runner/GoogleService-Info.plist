@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>995680613718-ehhbtk8n96ufurkdrm9kv6vg8q5g6ral.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.995680613718-ehhbtk8n96ufurkdrm9kv6vg8q5g6ral</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDXmWmMD56kYX1LsBZYf0b0gjtVZ-ZRChg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>995680613718</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.myfridge</string>
+	<key>PROJECT_ID</key>
+	<string>myfridge-97751</string>
+	<key>STORAGE_BUCKET</key>
+	<string>myfridge-97751.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:995680613718:ios:852d12b642e93bc832d2f7</string>
+</dict>
+</plist>
