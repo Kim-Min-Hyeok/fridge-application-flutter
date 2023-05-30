@@ -1,0 +1,72 @@
+name: my_fridge
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.4 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  floating_bottom_bar: ^0.0.2
+  animated_splash_screen: ^1.3.0
+  page_transition: ^2.0.9
+  firebase_core: ^2.13.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/search.png
+    - assets/images/list.png
+    - assets/images/list_active.png
+    - assets/images/recipe.png
+    - assets/images/recipe_active.png
+    - assets/images/plus.png
+    - assets/images/add_fridge.png
+    - assets/images/fridge1.png
+    - assets/images/fridge2.png
+    - assets/images/fridge3.png
+    - assets/images/fridge4.png
+    - assets/images/fridge5.png
+    - assets/images/fridge6.png
+    - assets/images/splash.png
+    - assets/images/barcode_scanner.png
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
