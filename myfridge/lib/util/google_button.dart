@@ -42,6 +42,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   _isSigningIn = false;
                 });
                 if (user != null) {
+                  // ignore: use_build_context_synchronously
                   Navigator.pushNamed(context, '/home');
                 }
               },
