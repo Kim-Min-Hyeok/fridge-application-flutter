@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/colorTheme.dart';
+import 'package:tab_container/tab_container.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
@@ -32,17 +33,16 @@ class _ListPageState extends State<ListPage> {
               fontSize: 20,
               fontWeight: FontWeight.bold),
         ),
-        actions: [
-          Container(
+        actions: const [
+          SizedBox(
             width: 80,
             child: Center(
               child: Text(
                 '냉장고1',
                 style: TextStyle(
-                  color: ColorStyle.secondary,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold
-                ),
+                    color: ColorStyle.secondary,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ), //나중에 저장된 냉장고 이름으로 바꿔야 함
@@ -54,7 +54,7 @@ class _ListPageState extends State<ListPage> {
           children: [
             Row(
               children: [
-                Container(
+                const SizedBox(
                     width: 324,
                     height: 50,
                     child: TextField(
@@ -70,7 +70,7 @@ class _ListPageState extends State<ListPage> {
                     )),
                 IconButton(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.search,
                       size: 50,
                       color: ColorStyle.primary,
@@ -78,8 +78,30 @@ class _ListPageState extends State<ListPage> {
               ],
             ),
             Expanded(
-              child: ListView(),
-            )
+              child: TabContainer(
+                tabEdge: TabEdge.bottom,
+                color: const Color.fromARGB(255, 221, 221, 221),
+                tabs: const [
+                  '곧 상해요',
+                  '전체 목록',
+                  '상했어요',
+                ],
+                children: [
+                  Container(
+                    child: const Text('Child 1'),
+                  ),
+                  Container(
+                    child: const Text('Child 2'),
+                  ),
+                  Container(
+                    child: const Text('Child 3'),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
           ],
         ),
       ),
