@@ -4,12 +4,18 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   addFridge(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      height: 227,
-      child: ElevatedButton(
-        onPressed: () {},
-        child: Image.asset('assets/images/add_fridge.png'),
+    return ElevatedButton(
+      onPressed: () {
+        debugPrint('The image button has been tapped');
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      ),
+      child: Image.asset(
+        'assets/images/add_button.png',
+        fit: BoxFit.fitWidth,
       ),
     );
   }
@@ -18,8 +24,6 @@ class HomePage extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: Ink.image(
-        width: 175,
-        height: 130,
         image: const AssetImage('assets/images/fridge1.png'),
       ),
     );
@@ -63,9 +67,12 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
+                crossAxisSpacing: 20.0,
                 scrollDirection: Axis.vertical,
-                primary: false,
+                primary: true,
                 children: [
+                  fridgeAdded(context),
+                  fridgeAdded(context),
                   addFridge(context),
                 ],
               ),

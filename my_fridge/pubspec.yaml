@@ -14,6 +14,7 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   floating_bottom_bar: ^0.0.2
+  animated_bottom_navigation_bar: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +34,7 @@ flutter:
     - assets/images/recipe_active.png
     - assets/images/plus.png
     - assets/images/add_fridge.png
+    - assets/images/add_button.png
     - assets/images/fridge1.png
     - assets/images/fridge2.png
     - assets/images/fridge3.png
