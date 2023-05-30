@@ -20,6 +20,8 @@ dependencies:
   cloud_firestore: ^4.7.1
   firebase_auth: ^4.6.1
   google_sign_in: ^6.1.2
+  tab_container: ^2.0.0
+  flutter_vector_icons: ^2.0.0
 
 dev_dependencies:
   flutter_test:
