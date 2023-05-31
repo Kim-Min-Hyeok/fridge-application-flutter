@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../model/product.dart';
 import '../theme/colorTheme.dart';
-import 'package:tab_container/tab_container.dart';
 
 class ListPage extends StatefulWidget {
-  const ListPage({super.key});
+  const ListPage({Key? key}) : super(key: key);
 
   @override
   State<ListPage> createState() => _ListPageState();
@@ -16,40 +16,24 @@ class _ListPageState extends State<ListPage> {
   int _selectedIndex = 0;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  late User? _user;
-  List<String> _itemTitles = [];
+  User? _user;
 
   @override
   void initState() {
     super.initState();
-    _getUser();
-  }
-
-  Future<void> _getUser() async {
     _user = _auth.currentUser;
-    if (_user != null) {
-      await _getItems();
-    }
-  }
-
-  Future<void> _getItems() async {
-    QuerySnapshot itemSnapshot = await _firestore
-        .collection('items')
-        .where('userId', isEqualTo: _user!.uid)
-        .get();
-    setState(() {
-      _itemTitles =
-          itemSnapshot.docs.map((doc) => doc['title'] as String).toList();
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference items = FirebaseFirestore.instance.collection('items');
+
     if (_user == null) {
       return const Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.white,
+          color: Color(0xffff0c4c8a),
+        ),
       );
     }
 
@@ -84,7 +68,7 @@ class _ListPageState extends State<ListPage> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-          ), //나중에 저장된 냉장고 이름으로 바꿔야 함
+          ),
         ],
       ),
       body: Padding(
@@ -94,48 +78,75 @@ class _ListPageState extends State<ListPage> {
             Row(
               children: [
                 const SizedBox(
-                    width: 324,
-                    height: 50,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ColorStyle
-                                .primary, // Set the desired border color
-                            width: 3.0, // Set the desired border weight
-                          ),
+                  width: 324,
+                  height: 50,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorStyle.primary,
+                          width: 3.0,
                         ),
                       ),
-                    )),
+                    ),
+                  ),
+                ),
                 IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.search,
-                      size: 50,
-                      color: ColorStyle.primary,
-                    ))
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.search,
+                    size: 50,
+                    color: ColorStyle.primary,
+                  ),
+                ),
               ],
             ),
             Expanded(
-              child: TabContainer(
-                tabEdge: TabEdge.bottom,
-                color: const Color.fromARGB(255, 221, 221, 221),
-                tabs: const [
-                  '전체 목록',
-                  '곧 상해요',
-                  '상했어요',
-                ],
-                children: [
-                  Container(
-                    child: const Text('Child 1'),
-                  ),
-                  Container(
-                    child: const Text('Child 2'),
-                  ),
-                  Container(
-                    child: const Text('Child 3'),
-                  ),
-                ],
+              child: StreamBuilder<QuerySnapshot>(
+                // Fetching data from the 'items' collection
+                stream:
+                    items.where('userId', isEqualTo: _user!.uid).snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  // Error Handling conditions
+                  if (snapshot.hasError) {
+                    return const Text("Something went wrong");
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  // Data is output to the user
+                  if (snapshot.hasData) {
+                    List<Product> productList =
+                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                      Map<String, dynamic> data =
+                          document.data() as Map<String, dynamic>;
+                      String productName = data['product'];
+                      String expiryDate = data['date'];
+                      String userId = data['userId'];
+                      return Product(
+                        product: productName,
+                        date: expiryDate,
+                        userUid: userId,
+                      );
+                    }).toList();
+
+                    return ListView.builder(
+                      itemCount: productList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        Product product = productList[index];
+                        return ListTile(
+                          title: Text(product.product),
+                          subtitle: Text(product.date),
+                        );
+                      },
+                    );
+                  }
+
+                  return const Text("No data available");
+                },
               ),
             ),
             const SizedBox(
@@ -186,28 +197,26 @@ class _ListPageState extends State<ListPage> {
             label: '',
           ),
           BottomNavigationBarItem(
-              icon: Container(
-                height: 50,
-              ),
-              label: ''),
+            icon: Container(
+              height: 50,
+            ),
+            label: '',
+          ),
           BottomNavigationBarItem(
-              icon: Image.asset(
-                "assets/images/recipe.png",
-                height: 70,
-              ),
-              activeIcon: Image.asset(
-                "assets/images/recipe_active.png",
-                height: 70,
-              ),
-              label: ''),
+            icon: Image.asset(
+              "assets/images/recipe.png",
+              height: 70,
+            ),
+            activeIcon: Image.asset(
+              "assets/images/recipe_active.png",
+              height: 70,
+            ),
+            label: '',
+          ),
         ],
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
     );
-  }
-
-  List<Widget> _getChildren1() {
-    return _itemTitles.map((title) => Text(title)).toList();
   }
 }
