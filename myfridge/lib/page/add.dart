@@ -137,7 +137,9 @@ class _AddPageState extends State<AddPage> {
             child: Container(
               child: Image.asset('assets/images/barcode_scanner.png'),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/scan');
+            },
           )
         ]),
       ),
