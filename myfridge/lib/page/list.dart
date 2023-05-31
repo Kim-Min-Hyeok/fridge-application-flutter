@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../theme/colorTheme.dart';
 import 'package:tab_container/tab_container.dart';
 
@@ -12,8 +15,44 @@ class ListPage extends StatefulWidget {
 class _ListPageState extends State<ListPage> {
   int _selectedIndex = 0;
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  late User? _user;
+  List<String> _itemTitles = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getUser();
+  }
+
+  Future<void> _getUser() async {
+    _user = _auth.currentUser;
+    if (_user != null) {
+      await _getItems();
+    }
+  }
+
+  Future<void> _getItems() async {
+    QuerySnapshot itemSnapshot = await _firestore
+        .collection('items')
+        .where('userId', isEqualTo: _user!.uid)
+        .get();
+    setState(() {
+      _itemTitles =
+          itemSnapshot.docs.map((doc) => doc['title'] as String).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_user == null) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorStyle.background,
@@ -82,8 +121,8 @@ class _ListPageState extends State<ListPage> {
                 tabEdge: TabEdge.bottom,
                 color: const Color.fromARGB(255, 221, 221, 221),
                 tabs: const [
-                  '곧 상해요',
                   '전체 목록',
+                  '곧 상해요',
                   '상했어요',
                 ],
                 children: [
