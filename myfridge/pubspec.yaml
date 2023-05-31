@@ -22,8 +22,6 @@ dependencies:
   google_sign_in: ^6.1.2
   tab_container: ^2.0.0
   flutter_vector_icons: ^2.0.0
-  intl: ^0.18.1
-  calendar_date_picker2: ^0.5.2
 
 dev_dependencies:
   flutter_test:
