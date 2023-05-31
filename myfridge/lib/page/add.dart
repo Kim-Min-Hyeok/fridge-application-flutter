@@ -228,8 +228,6 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return CircularProgressIndicator();
-              } else if (snapshot.hasError) {
-                return Text('오류 발생: ${snapshot.error}');
               } else {
                 return GestureDetector(
                   child: Container(
