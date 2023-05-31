@@ -206,4 +206,8 @@ class _ListPageState extends State<ListPage> {
           FloatingActionButtonLocation.miniCenterDocked,
     );
   }
+
+  List<Widget> _getChildren1() {
+    return _itemTitles.map((title) => Text(title)).toList();
+  }
 }
