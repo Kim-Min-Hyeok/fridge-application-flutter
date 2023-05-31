@@ -73,7 +73,7 @@ class _ScanPageState extends State<ScanPage> {
           controller: cameraController,
           onDetect: (capture) {
             final List<Barcode> barcodes = capture.barcodes;
-            Navigator.pop(context, barcodes[0]);
+            Navigator.pop(context, barcodes[0].toString());
           },
         ),
     );

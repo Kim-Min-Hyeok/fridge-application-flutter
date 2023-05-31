@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.myfridge</string>
+	<string>com.myfridge.myfridge</string>
 	<key>PROJECT_ID</key>
 	<string>myfridge-97751</string>
 	<key>STORAGE_BUCKET</key>
