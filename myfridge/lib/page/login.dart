@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Image.asset('assets/images/splash.png'),
             ),
             const SizedBox(
-              height: 175,
+              height: 100,
             ),
             FutureBuilder(
               future: Authentication.initializeFirebase(),
