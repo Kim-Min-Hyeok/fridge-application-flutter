@@ -72,34 +72,37 @@ class _ListPageState extends State<ListPage> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(left: 20.0),
         child: Column(
           children: [
-            Row(
-              children: [
-                const SizedBox(
-                  width: 324,
-                  height: 50,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorStyle.primary,
-                          width: 3.0,
+            SizedBox(
+              child: Row(
+                children: [
+                  const Expanded(
+                    child: SizedBox(
+                      height: 40,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: ColorStyle.primary,
+                              width: 3.0,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.search,
-                    size: 50,
-                    color: ColorStyle.primary,
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.search,
+                      size: 40,
+                      color: ColorStyle.primary,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
