@@ -34,7 +34,7 @@ class MyFridge extends StatelessWidget {
         '/recipe': (BuildContext context) => const RecipePage(),
         '/add': (BuildContext context) => const AddPage(),
         '/recipe_detail': (BuildContext context) => const RecipeDetailPage(),
-        '/scan': (BuildContext context) => const ScanPage(),
+        '/scan': (BuildContext context) => ScanPage(),
       },
       theme: ThemeData(
         useMaterial3: true,
