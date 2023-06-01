@@ -11,6 +11,7 @@ import 'page/list.dart';
 import 'page/home.dart';
 import 'page/not_expired.dart';
 import 'page/scan.dart';
+import 'page/navigation.dart';
 
 class MyFridge extends StatelessWidget {
   const MyFridge({super.key});
@@ -32,6 +33,7 @@ class MyFridge extends StatelessWidget {
             ),
         '/home': (BuildContext context) => const HomePage(),
         '/login': (BuildContext context) => const LoginPage(),
+        '/navigation': (BuildContext context) => const NavigationPage(),
         '/list': (BuildContext context) => const ListPage(),
         '/recipe': (BuildContext context) => const RecipePage(),
         '/add': (BuildContext context) => const AddPage(),

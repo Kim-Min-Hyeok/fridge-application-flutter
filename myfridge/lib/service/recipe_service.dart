@@ -8,7 +8,7 @@ class RecipeService {
   static const String baseUrl = 'http://openapi.foodsafetykorea.go.kr/api/db78c7b4db404a198965/COOKRCP01/json/1/1000';
 
 
-  static Future<List<RecipeModel>> getProduct() async {
+  static Future<List<RecipeModel>> getRecipe() async {
     List<RecipeModel> productInstanses = [];
 
     final url = Uri.parse("$baseUrl");

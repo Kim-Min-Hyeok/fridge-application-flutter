@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void navigateToPage(int index) {
-    Navigator.pushNamed(context, '/list');
+    Navigator.pushNamed(context, '/navigation');
   }
 
   @override
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/list');
+              Navigator.pushNamed(context, '/navigation');
             },
             child: const Text('임시버튼'),
           )
