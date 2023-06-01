@@ -28,6 +28,8 @@ dependencies:
   wakelock: ^0.6.2
   mobile_scanner: ^3.2.0
   intl: ^0.18.1
+  http: ^0.13.6
+  collection: ^1.17.1
 
 dev_dependencies:
   flutter_test:

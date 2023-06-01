@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '995680613718',
     projectId: 'myfridge-97751',
     storageBucket: 'myfridge-97751.appspot.com',
-    iosBundleId: 'com.example.myfridge',
+    iosBundleId: 'com.myfridge.myfridge',
   );
 }

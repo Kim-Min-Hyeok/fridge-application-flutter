@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import '../theme/colorTheme.dart';
 
-MobileScannerController cameraController = MobileScannerController();
-
 class ScanPage extends StatefulWidget {
   ScanPage({Key? key, this.title}) : super(key: key);
   final String? title;
@@ -12,6 +10,20 @@ class ScanPage extends StatefulWidget {
 }
 
 class _ScanPageState extends State<ScanPage> {
+  late MobileScannerController cameraController;
+
+  @override
+  void initState() {
+    super.initState();
+    cameraController = MobileScannerController();
+  }
+
+  @override
+  void dispose() {
+    cameraController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +85,10 @@ class _ScanPageState extends State<ScanPage> {
           controller: cameraController,
           onDetect: (capture) {
             final List<Barcode> barcodes = capture.barcodes;
-            Navigator.pop(context, barcodes[0]);
+            for (final barcode in barcodes) {
+              debugPrint('Barcode found! ${barcode.rawValue}');
+            }
+            Navigator.pop(context, barcodes[0].toString());
           },
         ),
     );
