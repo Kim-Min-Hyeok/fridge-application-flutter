@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 import 'package:my_fridge/theme/colorTheme.dart';
 
@@ -19,6 +21,10 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
   final TextEditingController _productController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
 
+  String todayDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+  late String itemDate;
+  late int difference;
+
   Future<void> _addItem() async {
     User? user = _auth.currentUser;
     if (user != null) {
@@ -27,18 +33,25 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
       String product = _productController.text;
       String date = _dateController.text;
 
+      DateTime itemDateConvert = DateTime.parse(itemDate);
+      DateTime todayDateConvert = DateTime.parse(todayDate);
+      int difference = itemDateConvert.difference(todayDateConvert).inDays;
+
       try {
         await _firestore.collection('items').add({
           'userId': userId,
           'product': product,
           'date': date,
+          'difference': difference,
         });
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Item added successfully'),
+          duration: Duration(milliseconds: 900),
         ));
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Failed to add item'),
+          duration: Duration(milliseconds: 900),
         ));
         print('Error adding item: $e');
       }
@@ -89,8 +102,11 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
     if (newSelectedDate != null) {
       setState(() {
         _selectedDate.value = newSelectedDate;
-        _dateController.text =
-            '${_selectedDate.value.year}.${_selectedDate.value.month}.${_selectedDate.value.day}';
+        if (kDebugMode) {
+          print(newSelectedDate);
+        }
+        itemDate = DateFormat('yyyy-MM-dd').format(newSelectedDate);
+        _dateController.text = itemDate;
       });
     }
   }
@@ -99,15 +115,6 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: ColorStyle.primary,
-          ),
-        ),
         title: const Text(
           '상품 추가',
           style: TextStyle(
