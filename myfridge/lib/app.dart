@@ -6,8 +6,10 @@ import 'package:my_fridge/page/recipe.dart';
 import 'package:my_fridge/page/recipe_detail.dart';
 import 'package:my_fridge/theme/colorTheme.dart';
 import 'package:page_transition/page_transition.dart';
+import 'page/expired.dart';
 import 'page/list.dart';
 import 'page/home.dart';
+import 'page/not_expired.dart';
 import 'page/scan.dart';
 
 class MyFridge extends StatelessWidget {
@@ -35,6 +37,8 @@ class MyFridge extends StatelessWidget {
         '/add': (BuildContext context) => const AddPage(),
         '/recipe_detail': (BuildContext context) => const RecipeDetailPage(),
         '/scan': (BuildContext context) => ScanPage(),
+        '/expired': (BuildContext context) => const ExpiredPage(),
+        '/notexpired': (BuildContext context) => const NotExpiredPage(),
       },
       theme: ThemeData(
         useMaterial3: true,
