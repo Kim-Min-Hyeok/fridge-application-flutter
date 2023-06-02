@@ -102,34 +102,41 @@ class RecipeDetailPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.network(recipeIfo.imageUrl),
-                    SizedBox(
+                    Center(
+                      child: Image.network(
+                        recipeIfo.imageUrl,
+                        height: MediaQuery.of(context).size.height / 4,
+                      ),
+                    ),
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       '재료',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: ColorStyle.primary,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
-                    Divider(
+                    const Divider(
                       height: 5,
                       color: ColorStyle.primary,
                     ),
-                    SizedBox(height: 10,),
-                    Text(recipeIfo.ingredients),
-                    SizedBox(
-                      height:40,
+                    const SizedBox(
+                      height: 10,
                     ),
-                    Text(
+                    Text(recipeIfo.ingredients),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    const Text(
                       '조리 방법',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: ColorStyle.primary,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
-                    Divider(
+                    const Divider(
                       height: 5,
                       color: ColorStyle.primary,
                     ),
