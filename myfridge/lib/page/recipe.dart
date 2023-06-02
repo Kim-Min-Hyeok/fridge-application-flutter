@@ -178,6 +178,9 @@ class _RecipePageState extends State<RecipePage> {
                                       .startsWith(searchText.toLowerCase())) {
                                     return ListTile(
                                       title: Text(menu),
+                                      onTap: () {
+                                        Navigator.pushNamed(context, '/recipe_detail', arguments: menu);
+                                      },
                                     );
                                   }
                                   return Container();

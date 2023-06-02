@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:my_fridge/model/product.dart';
+import 'package:my_fridge/model/recipe.dart';
 
 import '../model/recipe.dart';
 
@@ -9,19 +9,19 @@ class RecipeService {
 
 
   static Future<List<RecipeModel>> getRecipe() async {
-    List<RecipeModel> productInstanses = [];
+    List<RecipeModel> recipeInstanses = [];
 
     final url = Uri.parse("$baseUrl");
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = jsonDecode(response.body);
-      final List<dynamic> products = responseData['COOKRCP01']['row'];
-      for (var product in products) {
-        final instance = RecipeModel.fromJson(product);
-        productInstanses.add(instance);
+      final List<dynamic> recipes = responseData['COOKRCP01']['row'];
+      for (var recipe in recipes) {
+        final instance = RecipeModel.fromJson(recipe);
+        recipeInstanses.add(instance);
       }
-      print(productInstanses);
-      return productInstanses;
+      print(recipeInstanses);
+      return recipeInstanses;
     }
     throw Error();
   }

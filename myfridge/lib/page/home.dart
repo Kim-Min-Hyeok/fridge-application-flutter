@@ -35,14 +35,6 @@ class _HomePageState extends State<HomePage> {
             fontSize: 30,
           ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/navigation');
-            },
-            child: const Text('임시버튼'),
-          )
-        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
