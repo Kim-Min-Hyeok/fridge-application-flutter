@@ -73,15 +73,6 @@ class _RecipePageState extends State<RecipePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorStyle.background,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: ColorStyle.primary,
-          ),
-        ),
         title: const Text(
           '레시피',
           style: TextStyle(
@@ -104,6 +95,90 @@ class _RecipePageState extends State<RecipePage> {
                 Icons.logout,
               ))
         ],
+      ),
+      drawer: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.6,
+        child: Drawer(
+          backgroundColor: Colors.white,
+          surfaceTintColor: const Color.fromARGB(255, 233, 233, 233),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              FutureBuilder<User?>(
+                future: FirebaseAuth.instance.authStateChanges().first,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && snapshot.data != null) {
+                    final user = snapshot.data!;
+                    final photoUrl = user.photoURL;
+                    final name = user.displayName;
+                    final email = user.email;
+
+                    return UserAccountsDrawerHeader(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      accountName: Text(
+                        name!,
+                        style: const TextStyle(
+                          color: ColorStyle.secondary,
+                        ),
+                      ),
+                      accountEmail: Text(
+                        email!,
+                        style: const TextStyle(
+                          color: ColorStyle.secondary,
+                        ),
+                      ),
+                      currentAccountPicture: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        backgroundImage: NetworkImage(photoUrl!),
+                      ),
+                    );
+                  }
+
+                  return const SizedBox
+                      .shrink(); // Return an empty SizedBox if data is null
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.home,
+                  size: 35,
+                  color: ColorStyle.primary,
+                ),
+                title: const Text(
+                  '안상했어요',
+                  style: TextStyle(
+                    color: ColorStyle.primary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/notexpired');
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.home,
+                  size: 35,
+                  color: ColorStyle.primary,
+                ),
+                title: const Text(
+                  '상했어요',
+                  style: TextStyle(
+                    color: ColorStyle.primary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/expired');
+                },
+              ),
+            ],
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
