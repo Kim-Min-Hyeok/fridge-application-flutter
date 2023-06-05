@@ -136,7 +136,7 @@ class _ListPageState extends State<ListPage> {
                   color: ColorStyle.primary,
                 ),
                 title: const Text(
-                  '안상해요',
+                  '안상했어요',
                   style: TextStyle(
                     color: ColorStyle.primary,
                     fontWeight: FontWeight.bold,
