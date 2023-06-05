@@ -43,7 +43,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
                 if (user != null) {
                   // ignore: use_build_context_synchronously
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushNamed(context, '/navigation');
                 }
               },
               child: const Padding(
