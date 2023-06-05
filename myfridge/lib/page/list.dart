@@ -118,24 +118,6 @@ class _ListPageState extends State<ListPage> {
                   color: ColorStyle.primary,
                 ),
                 title: const Text(
-                  '홈',
-                  style: TextStyle(
-                    color: ColorStyle.primary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/home');
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.home,
-                  size: 35,
-                  color: ColorStyle.primary,
-                ),
-                title: const Text(
                   '안상했어요',
                   style: TextStyle(
                     color: ColorStyle.primary,
