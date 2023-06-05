@@ -8,7 +8,6 @@ import 'package:my_fridge/theme/colorTheme.dart';
 import 'package:page_transition/page_transition.dart';
 import 'page/expired.dart';
 import 'page/list.dart';
-import 'page/home.dart';
 import 'page/not_expired.dart';
 import 'page/scan.dart';
 import 'page/navigation.dart';
@@ -31,7 +30,6 @@ class MyFridge extends StatelessWidget {
               splashIconSize: 300,
               backgroundColor: ColorStyle.background,
             ),
-        '/home': (BuildContext context) => const HomePage(),
         '/login': (BuildContext context) => const LoginPage(),
         '/navigation': (BuildContext context) => const NavigationPage(),
         '/list': (BuildContext context) => const ListPage(),
