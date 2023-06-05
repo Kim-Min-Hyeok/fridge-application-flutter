@@ -202,6 +202,7 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
                         child: TextField(
                           controller: _dateController,
                           decoration: InputDecoration(
+                            hintText: "왼쪽 \"유통기한\"을 터치해주세요",
                             fillColor: Colors.grey[200],
                             filled: true,
                           ),
