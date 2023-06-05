@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:my_fridge/theme/colorTheme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 import '../util/auth.dart';
 
-import '../model/product.dart';
 import '../model/recipe.dart';
 import '../service/recipe_service.dart';
-import 'package:collection/collection.dart';
 
 class RecipePage extends StatefulWidget {
   const RecipePage({super.key});
@@ -18,7 +15,7 @@ class RecipePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<RecipePage> {
-  int _selectedIndex = 2;
+  final int _selectedIndex = 2;
   String searchText = "";
   int searchNum = 0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -158,7 +155,8 @@ class _RecipePageState extends State<RecipePage> {
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return Center(child: const CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           } else if (!snapshot.hasData) {
                             return const Text('레시피 정보 불러오기 실패');
                           } else {
@@ -179,7 +177,9 @@ class _RecipePageState extends State<RecipePage> {
                                     return ListTile(
                                       title: Text(menu),
                                       onTap: () {
-                                        Navigator.pushNamed(context, '/recipe_detail', arguments: menu);
+                                        Navigator.pushNamed(
+                                            context, '/recipe_detail',
+                                            arguments: menu);
                                       },
                                     );
                                   }
