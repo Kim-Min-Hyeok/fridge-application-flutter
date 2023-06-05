@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,6 +12,15 @@ class NotExpiredPage extends StatefulWidget {
 }
 
 class _NotExpiredPageState extends State<NotExpiredPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _user = _auth.currentUser;
+  }
+
   @override
   Widget build(BuildContext context) {
     CollectionReference items = FirebaseFirestore.instance.collection('items');
@@ -20,7 +30,7 @@ class _NotExpiredPageState extends State<NotExpiredPage> {
         title: const Text('Not Expired Items'),
       ),
       body: FutureBuilder<QuerySnapshot>(
-        future: items.get(),
+        future: items.where('userId', isEqualTo: _user?.uid).get(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return const Text('Something went wrong');
