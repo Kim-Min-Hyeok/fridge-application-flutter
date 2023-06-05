@@ -13,15 +13,14 @@ class NavigationPage extends StatefulWidget {
 class _NavigationPageState extends State<NavigationPage> {
   int _selectedIndex = 0;
 
-  List<Widget> _widgetOptions = <Widget>[
-    ListPage(),
+  final List<Widget> _widgetOptions = <Widget>[
+    const ListPage(),
     Container(),
-    RecipePage(),
+    const RecipePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: _widgetOptions.elementAt(_selectedIndex),
