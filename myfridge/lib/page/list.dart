@@ -17,7 +17,7 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
   String searchText = "";
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? _user;
@@ -136,7 +136,7 @@ class _ListPageState extends State<ListPage> {
                   color: ColorStyle.primary,
                 ),
                 title: const Text(
-                  '곧 상해요',
+                  '안상해요',
                   style: TextStyle(
                     color: ColorStyle.primary,
                     fontWeight: FontWeight.bold,
