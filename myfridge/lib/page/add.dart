@@ -2,13 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:intl/intl.dart';
 
 import 'package:my_fridge/theme/colorTheme.dart';
 import '../service/barcode_service.dart';
 import '../model/barcode.dart';
-import 'package:collection/collection.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key, this.restorationId});
@@ -29,21 +28,33 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
   late String itemDate;
   late int difference;
 
-  String barcode = '';
   String productName = '';
+  List<BarcodeModel> products = [];
 
-  String getProductNameFromSnapshot(
-      AsyncSnapshot<List<BarcodeModel>> snapshot, String barcode) {
-    if (snapshot.hasData) {
-      List<BarcodeModel> products = snapshot.data!;
-      BarcodeModel? matchedProduct = products.firstWhereOrNull(
-        (product) => product.barcode == barcode,
-      );
-      if (matchedProduct != null) {
-        return matchedProduct.name;
+  String getProductName(String barcode) {
+    for (BarcodeModel product in products) {
+      if (product.barcode == barcode) {
+        return product.name;
       }
     }
-    return '없어여';
+    return '등록된 상품정보가 없습니다.';
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _loadProductData();
+  // }
+
+  Future<void> _loadProductData() async {
+    try {
+      List<BarcodeModel> productList = await BarcodeService.getProduct();
+      setState(() {
+        products = productList;
+      });
+    } catch (e) {
+      print('Failed to load product data: $e');
+    }
   }
 
   Future<void> _addItem() async {
@@ -134,6 +145,7 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
 
   @override
   Widget build(BuildContext context) {
+    List<BarcodeModel> products;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -231,35 +243,26 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
           const SizedBox(
             height: 50,
           ),
-          FutureBuilder<List<BarcodeModel>>(
-            future: BarcodeService.getProduct(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              } else {
-                return GestureDetector(
-                  child: Container(
-                    child: Image.asset('assets/images/barcode_scanner.png'),
-                  ),
-                  onTap: () async {
-                    final result =
-                        await Navigator.pushNamed(context, '/scan').then(
-                      (result) {
-                        if (result != null) {
-                          String scannedBarcode = result as String;
-                          setState(() {
-                            barcode = scannedBarcode;
-                            productName =
-                                getProductNameFromSnapshot(snapshot, barcode);
-                            _productController.text = productName;
-                          });
-                        }
-                      },
-                    );
-                  },
-                );
-              }
+          GestureDetector(
+            child: Container(
+              child: Image.asset('assets/images/barcode_scanner.png'),
+            ),
+            onTap: () async {
+              final result = await Navigator.pushNamed(context, '/scan');
+              setState(() {
+                _loadProductData().then((_) {
+                  if (result != null) {
+                    final barcode = result as String;
+                    print(barcode);
+                    productName = getProductName(barcode!);
+                    _productController.text = productName;
+                  }
+                });
+              });
             },
+          ),
+          SizedBox(
+            height: 10,
           ),
         ],
       ),

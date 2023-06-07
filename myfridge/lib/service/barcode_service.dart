@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:my_fridge/model/product.dart';
 
 import '../model/barcode.dart';
 

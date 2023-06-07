@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:my_fridge/model/recipe.dart';
 
-import '../model/recipe.dart';
 
 class RecipeService {
   static const String baseUrl = 'http://openapi.foodsafetykorea.go.kr/api/db78c7b4db404a198965/COOKRCP01/json/1/1000';
