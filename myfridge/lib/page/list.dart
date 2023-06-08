@@ -17,7 +17,6 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  final int _selectedIndex = 0;
   String searchText = "";
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? _user;
@@ -36,6 +35,7 @@ class _ListPageState extends State<ListPage> {
       return const Center(
         child: CircularProgressIndicator(
           backgroundColor: Colors.white,
+          // ignore: use_full_hex_values_for_flutter_colors
           color: Color(0xffff0c4c8a),
         ),
       );
