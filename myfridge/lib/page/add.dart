@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:my_fridge/theme/colorTheme.dart';
 import '../service/barcode_service.dart';
 import '../model/barcode.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key, this.restorationId});
@@ -145,7 +146,6 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
 
   @override
   Widget build(BuildContext context) {
-    List<BarcodeModel> products;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -244,9 +244,7 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
             height: 50,
           ),
           GestureDetector(
-            child: Container(
-              child: Image.asset('assets/images/barcode_scanner.png'),
-            ),
+            child: Image.asset('assets/images/barcode_scanner.png'),
             onTap: () async {
               final result = await Navigator.pushNamed(context, '/scan');
               setState(() {
@@ -254,14 +252,14 @@ class _AddPageState extends State<AddPage> with RestorationMixin {
                   if (result != null) {
                     final barcode = result as String;
                     print(barcode);
-                    productName = getProductName(barcode!);
+                    productName = getProductName(barcode);
                     _productController.text = productName;
                   }
                 });
               });
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
         ],
