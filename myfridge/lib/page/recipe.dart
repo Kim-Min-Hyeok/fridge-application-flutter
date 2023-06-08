@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:my_fridge/theme/colorTheme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,7 +17,6 @@ class RecipePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<RecipePage> {
-  final int _selectedIndex = 2;
   String searchText = "";
   int searchNum = 0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -51,6 +52,7 @@ class _RecipePageState extends State<RecipePage> {
         return countB.compareTo(countA);
       });
     }
+    // ignore: unnecessary_null_comparison
     if (matchedMenus == null) {
       matchedMenus.add('일치하는 레시피가 없어요');
     }
@@ -65,6 +67,7 @@ class _RecipePageState extends State<RecipePage> {
       return const Center(
         child: CircularProgressIndicator(
           backgroundColor: Colors.white,
+          // ignore: use_full_hex_values_for_flutter_colors
           color: Color(0xffff0c4c8a),
         ),
       );
